@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="optionList">
+        <item>AR</item>
+        <item>모션 인식</item>
+    </string-array>
+</resources>

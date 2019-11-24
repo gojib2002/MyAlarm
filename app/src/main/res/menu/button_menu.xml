@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/delete"
+        android:icon="@android:drawable/ic_menu_save"
+        android:title="삭제"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/stop"
+        android:icon="@android:drawable/ic_menu_save"
+        android:title="알람 정지"
+        app:showAsAction="always"
+        />
+</menu>
