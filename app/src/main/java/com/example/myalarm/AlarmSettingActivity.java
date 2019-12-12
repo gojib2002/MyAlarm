@@ -1,15 +1,22 @@
 package com.example.myalarm;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.nfc.Tag;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
@@ -18,6 +25,7 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,6 +47,7 @@ public class AlarmSettingActivity extends AppCompatActivity {
     static int AlarmNumber;
     static Spinner spinner;
     public static Bitmap image;
+    private Context thisContext = this;
     int option;
 
     @Override
@@ -71,20 +80,8 @@ public class AlarmSettingActivity extends AppCompatActivity {
 
         spinner.setSelection(option);
 
-        try{
-            Toast.makeText(this,"???",Toast.LENGTH_SHORT).show();
-
-            image = null;
-            for(int i=0;i<MainActivity.AlarmList.size();i++){
-                if(MainActivity.AlarmList.get(i).AlarmNumber == AlarmNumber){
-                    image = MainActivity.AlarmList.get(i).image;
-                }
-            }
-
-            imagebutton.setImageBitmap(image);
-        } catch(Exception e){
-
-        }
+        image = BitmapFactory.decodeResource(getResources(), R.drawable.arimage);
+        imagebutton.setImageBitmap(image);
 
         if(hour == -1){
             isNew = true;
@@ -199,10 +196,17 @@ public class AlarmSettingActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_PICK);
-                startActivityForResult(Intent.createChooser(intent, "Get Album"), REQUEST_IMAGE_1);
+                OutputStream outStream = null;
+
+                try{
+                    outStream = new FileOutputStream(getExternalCacheDir().getAbsolutePath()+"arimage.PNG");
+                    image.compress(Bitmap.CompressFormat.PNG, 100, outStream);
+                    outStream.flush();
+                    outStream.close();
+
+                    Toast.makeText(thisContext,"downloaded", Toast.LENGTH_SHORT).show();
+                }catch(Exception e){
+                }
             }
         });
 
@@ -210,6 +214,12 @@ public class AlarmSettingActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 option = position;
+
+                if(position == 0){
+                    imagebutton.setVisibility(View.VISIBLE);
+                }else{
+                    imagebutton.setVisibility(View.INVISIBLE);
+                }
             }
 
             @Override
