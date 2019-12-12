@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                         if (CurrentHour == AlarmList.get(ThreadNumber).hour && CurrentMinute == AlarmList.get(ThreadNumber).minute && AlarmList.get(ThreadNumber).on) {
 
                             if(AlarmList.get(ThreadNumber).option == 0) {
-                                Intent intent = th.getPackageManager().getLaunchIntentForPackage("com.Test.sampleAR");
+                                Intent intent = th.getPackageManager().getLaunchIntentForPackage("com.DefaultCompany.UaaLExample");
                                 intent.setAction(Intent.ACTION_MAIN);
                                 startActivity(intent);
                             }else{

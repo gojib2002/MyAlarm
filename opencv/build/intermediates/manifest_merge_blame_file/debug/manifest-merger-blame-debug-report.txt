@@ -6,8 +6,8 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="21"
-8-->C:\Users\gojib2002\AndroidStudioProjects\MyAlarm\opencv\java\AndroidManifest.xml
+8-->C:\Users\gojib\Documents\GitHub\MyAlarm\opencv\java\AndroidManifest.xml
 9        android:targetSdkVersion="26" />
-9-->C:\Users\gojib2002\AndroidStudioProjects\MyAlarm\opencv\java\AndroidManifest.xml
+9-->C:\Users\gojib\Documents\GitHub\MyAlarm\opencv\java\AndroidManifest.xml
 10
 11</manifest>
